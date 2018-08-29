@@ -1,3 +1,3 @@
-# Pomodoro Clock
+# Pomodoro clock
 
-this is part of the Odin Project's Webdevelopment 101
+this is part of the Odin Project

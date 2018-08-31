@@ -1,20 +1,35 @@
-#title{
+#title {
     color: black;
 	font-size: 5vw;
 	text-align: center;
 }
-#clock{
+#clock {
     border: solid 1px;
 	text-align:	center;
 	height: 50vh;
 }
-.digit{
-	font-size: 16vw;	
+.digit {
+	font-size: 16vw;
 }
-#loop{
+#loop {
 	font-size: 5em;
 }
-#controller{
+#controller {
 	text-align: center;
+}
+#controller button{
+	border: none;
+	background: white;
+}
+#thebutton {
 	font-size: 5em;
+}
+#thebutton:active {
+	font-size: 4.5em
+}
+#restart {
+	font-size: 2em;
+}
+#restart:active {
+	font-size: 1.5em;
 }

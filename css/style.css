@@ -1,6 +1,20 @@
 #title{
-    color: red;
+    color: black;
+	font-size: 5vw;
+	text-align: center;
 }
 #clock{
-    
+    border: solid 1px;
+	text-align:	center;
+	height: 50vh;
+}
+.digit{
+	font-size: 16vw;	
+}
+#loop{
+	font-size: 5em;
+}
+#controller{
+	text-align: center;
+	font-size: 5em;
 }

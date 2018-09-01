@@ -1,12 +1,21 @@
+*{
+    box-sizing: border-box;
+}
 #title {
     color: black;
 	font-size: 5vw;
 	text-align: center;
 }
 #clock {
-    border: solid 1px;
+    border: solid 1px blue;
 	text-align:	center;
 	height: 50vh;
+	display: flex;
+  	justify-content: center;
+  	align-items: center;
+}
+#digitsbox {
+	border: solid 1px red;
 }
 .digit {
 	font-size: 16vw;
@@ -15,20 +24,31 @@
 	font-size: 5em;
 }
 #controller {
+	position: relative;
 	text-align: center;
+	border: solid 1px green
 }
 #controller button{
 	border: none;
-	background: white;
+	/*background: white;*/
 }
 #thebutton {
-	font-size: 5em;
+	background: no-repeat center;
+	background-image: url("https://cdn.icon-icons.com/icons2/1132/PNG/512/1486348532-music-play-pause-control-go-arrow_80458.png");
+	background-size: 200px;
+	height: 100px;
+	width: 100px;
 }
 #thebutton:active {
 	font-size: 4.5em
 }
-#restart {
-	font-size: 2em;
+#reset {
+	position: relative;
+	background: no-repeat center;
+	background-image: url("https://cdn.icon-icons.com/icons2/1132/PNG/512/1486348537-music-repeat-loop-again-circle-arrow_80451.png");
+	background-size: 70px;
+	height: 50px;
+	width: 50px;
 }
 #restart:active {
 	font-size: 1.5em;

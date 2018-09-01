@@ -1,27 +1,39 @@
 //DELETE THIS LATER
 var document,setInterval,clearInterval,window;
+
 //global variables
 var minute, second, loop;
 minute = document.querySelector("#minute");
 second = document.querySelector("#second");
 loop = document.querySelector("#loop");
 
-var totalseconds, progress;
-totalseconds = (Number(minute.textContent) * 60) + Number(second.textContent);
-progress = totalseconds;
+var total, progress;
+total = (Number(minute.textContent) * 60) + Number(second.textContent);
+progress = total;
 
-var thebutton, restartbutton; 
-thebutton = document.querySelector("#thebutton");
-restartbutton = document.querySelector("#restart");
+var theButton, resetButton; 
+theButton = document.querySelector("#thebutton");
+resetButton = document.querySelector("#reset");
 
 var clock, clockstatus = 0;
 
 //functions
 // stolen from stackoverflow
 function countdown() {
-	var timer = progress, minutes, seconds, loops = Number(loop.textContent);
-    minutes = parseInt(timer / 60, 10);
-    seconds = parseInt(timer % 60, 10);		
+	var minutes, seconds, loops = Number(loop.textContent);
+    if (--progress == 0) {
+		if (loops-- == 0) {
+			clearInterval(clock);
+		}
+		else {
+			progress = total;
+			//if (loops == 0) {loop.textContent = ""}
+			//else loop.textContent = loops;
+			loop.textContent = loops;
+		}
+    }
+    minutes = parseInt(progress / 60, 10);
+    seconds = parseInt(progress % 60, 10);		
 
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -29,46 +41,52 @@ function countdown() {
     minute.textContent = minutes;
 	second.textContent = seconds;
 	
-    if (timer-- == 0) {
-		if (loops-- == 0) {
-			clearInterval(clock);
-		}
-		else {
-			timer = totalseconds;
-			//if (loops == 0) {loop.textContent = ""}
-			//else loop.textContent = loops;
-			loop.textContent = loops;
-		}
-    }
-	progress = timer;
+	test();
 }
-
-function clockcontrol() {
+//
+function clockControl() {
 	if (clockstatus == 0){
 		clockstatus = 1;
-		thebutton.textContent = "pause";
+		theButton.style.backgroundImage = "url('https://cdn.icon-icons.com/icons2/1132/PNG/512/1486348534-music-pause-stop-control-play_80459.png')";
 		clock = setInterval(countdown, 1000);
+		resetButtonVisibilty();
 	}
 	else {
 		clockstatus = 0;
-		thebutton.textContent = "start";
+		theButton.style.backgroundImage = "url('https://cdn.icon-icons.com/icons2/1132/PNG/512/1486348532-music-play-pause-control-go-arrow_80458.png')";
 		clearInterval(clock);
+		resetButtonVisibilty();
 	}
 }
 
-function restart() {
-	minute.textContent = "25";
-	second.textContent = "00";
-	loop.textContent = "2";
+function resetButtonVisibilty() {
+	if (clockstatus == 0 ){resetButton.style.visibility = "visible"}
+	else {resetButton.style.visibility = "hidden"}
 }
 
-function check() {
-	console.log("html:",minute.textContent,second.textContent,loop.textContent);
-	console.log("total:", totalseconds);
+function reset() {
+	clearInterval(clock);
+	clockstatus = 0;
+	minute.textContent = "00";
+	second.textContent = "05";
+	loop.textContent = "2";
+	total = (Number(minute.textContent) * 60) + Number(second.textContent);
+	progress = total;
+	theButton.style.backgroundImage = "url('https://cdn.icon-icons.com/icons2/1132/PNG/512/1486348532-music-play-pause-control-go-arrow_80458.png')";
+	resetButton.style.visibility = "hidden";
+}
+//test
+function test() {
+	console.log("clock:",minute.textContent+":"+second.textContent,loop.textContent);
+	console.log("total:", total);
 	console.log("progress:", progress);
 	console.log("clockstatus:",clockstatus);
 }
+//
 
 //event listeners
-thebutton.addEventListener("click", ()=>{clockcontrol()});
-restartbutton.addEventListener("click", ()=>{restart()});
+theButton.addEventListener("click", ()=>{clockControl()});
+resetButton.addEventListener("click", ()=>{reset()});
+
+//actions
+resetButton.style.visibility = "hidden";

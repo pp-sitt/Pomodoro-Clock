@@ -7,7 +7,7 @@ this is part of the Odin Project
 - loops **DONE**
 - start/pause toggle button **DONE**
 - reset button when paused **DONE**
-- be able to set the timer
+- be able to set the timer **DONE**
 - break and work phase with icon
 - when it's break time the big digits change to text "BREAK TIME!" and the small digit start counting down with added ":00" behide
 - long break after 4 loops

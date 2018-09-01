@@ -1,11 +1,13 @@
-*{
+* {
     box-sizing: border-box;
 }
+
 #title {
     color: black;
 	font-size: 5vw;
 	text-align: center;
 }
+
 #clock {
     border: solid 1px blue;
 	text-align:	center;
@@ -17,18 +19,25 @@
 #digitsbox {
 	border: solid 1px red;
 }
-.digit {
-	font-size: 16vw;
+.digits {
+	border: none;
+	font-size: 20vh;
+	width: 23vh;
+}
+.digits:focus{
+	outline: none;
 }
 #loop {
-	font-size: 5em;
+	font-size: 10vh;
+	width: 7vh;
 }
+
 #controller {
 	position: relative;
 	text-align: center;
-	border: solid 1px green
+	border: solid 1px green;
 }
-#controller button{
+#controller button {
 	border: none;
 	/*background: white;*/
 }
@@ -40,7 +49,7 @@
 	width: 100px;
 }
 #thebutton:active {
-	font-size: 4.5em
+	font-size: 4.5em;
 }
 #reset {
 	position: relative;

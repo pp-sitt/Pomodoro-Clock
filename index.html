@@ -8,12 +8,16 @@
 <body>
     <h1 id="title">Pomodoro Clock</h1>
     <div id="clock">
+		<h1 id="phase"></h1>
 		<div id="digitsbox">
-		<input id="minute" class="digits" value="01" maxlength="2"></input>
-		<span class="digits">:</span>
-		<input id="second" class="digits" value="05" maxlength="2"></input>
-		<input id="loop" class="digits" value="2" maxlength="1"></input>
-		<h1>click on the number to edit</h1>
+			<input id="minute" class="digits" value="00" maxlength="2"></input>
+			<span id="twodots" class="digits">:</span>
+			<input id="second" class="digits" value="05" maxlength="2"></input>
+			<input id="breakminute" class="breakdigits digits" value="00" maxlength="2"></input>
+			<span class="breakdigits">:</span>
+			<input id="breaksecond" class="breakdigits digits" value="05" maxlength="2"></input>
+			<input id="loop" class="digits" value="2" maxlength="1"></input>
+			<h1>click on the number to edit</h1>
 		</div>
     </div>
 	<div id="controller">

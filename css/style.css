@@ -5,6 +5,7 @@
 #title {
     color: black;
 	font-size: 5vw;
+	font-family: monospace;
 	text-align: center;
 }
 
@@ -24,12 +25,24 @@
 	font-size: 20vh;
 	width: 23vh;
 }
-.digits:focus{
+.digits:focus, .breakdigits {
 	outline: none;
 }
+#twodots{
+	position: relative;
+	top: -25px;
+}
 #loop {
-	font-size: 10vh;
+	font-size: 5vh;
 	width: 7vh;
+}
+.breakdigits {
+	border: none;
+	font-size: 10vh;
+	width: 12vh;
+}
+#breakminute {
+	width: 12vh;
 }
 
 #controller {
@@ -42,11 +55,13 @@
 	/*background: white;*/
 }
 #thebutton {
+	position: relative;
+	left: 20px;
 	background: no-repeat center;
 	background-image: url("https://cdn.icon-icons.com/icons2/1132/PNG/512/1486348532-music-play-pause-control-go-arrow_80458.png");
-	background-size: 200px;
-	height: 100px;
-	width: 100px;
+	background-size: 130px;
+	height: 80px;
+	width: 80px;
 }
 #thebutton:active {
 	font-size: 4.5em;
@@ -54,10 +69,10 @@
 #reset {
 	position: relative;
 	background: no-repeat center;
-	background-image: url("https://cdn.icon-icons.com/icons2/1132/PNG/512/1486348537-music-repeat-loop-again-circle-arrow_80451.png");
-	background-size: 70px;
-	height: 50px;
-	width: 50px;
+	background-image: url("https://cdn2.iconfinder.com/data/icons/game-center-mixed-icons/512/arrow2.png");
+	background-size: 30px;
+	height: 30px;
+	width: 30px;
 }
 #restart:active {
 	font-size: 1.5em;

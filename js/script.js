@@ -2,82 +2,131 @@
 var document, setInterval, clearInterval, window;
 
 //global variables
-var minute, second, loop;
+var minute, second;
 minute = document.querySelector("#minute");
 second = document.querySelector("#second");
+
+var breakminute, breaksecond;
+breakminute = document.querySelector("#breakminute");
+breaksecond = document.querySelector("#breaksecond");
+
+var loop, phase;
 loop = document.querySelector("#loop");
+phase = document.querySelector("#phase");
 
 var theButton, resetButton, inputs;
 theButton = document.querySelector("#thebutton");
 resetButton = document.querySelector("#reset");
 inputs = document.querySelectorAll(".digits");
 
-var clock, clockstatus = 0;
-var total, progress;
+var clock, clockState = 0;
+var wTotal, wProgress;
+var bTotal, bProgress;
+var loops = Number(loop.value), phaseState = "work";
 
 //functions
 // stolen from stackoverflow
 function countdown() {
-	var minutes, seconds, loops = Number(loop.value);
+	var minutes, seconds, outputM, outputS, progress;
+	
+	if(loop.value == 0){return}
+	
+	if (phaseState == "work") {
+		outputM = minute, outputS = second;
+		progress = wProgress;
+	}
+	else if (phaseState == "break") {
+		outputM = breakminute, outputS = breaksecond;
+		progress = bProgress;
+	}
+	
     if (--progress == 0) {
-		if (loops-- == 0) {
-			clearInterval(clock);
+		if (phaseState == "work"){
+			phaseState = "break";
 		}
-		else {
-			progress = total;
-			//if (loops == 0) {loop.value = ""}
-			//else loop.value = loops;
-			loop.value = loops;
+		else if (phaseState == "break"){
+			if (--loop.value == 0) {
+				clearInterval(clock);
+			}
+			else {
+				wProgress = wTotal, bProgress = bTotal;
+				phaseState = "work";
+				progress = wProgress;
+				minute.value = calculateMinute(progress);
+				second.value = calculateSecond(progress);
+				//if (loops == 0) {loop.value = ""}
+				//else loop.value = loops;
+			}
 		}
     }
-    minutes = parseInt(progress / 60, 10);
-    seconds = parseInt(progress % 60, 10);		
 
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-    seconds = seconds < 10 ? "0" + seconds : seconds;
+    minutes = calculateMinute(progress);
+    seconds = calculateSecond(progress);
 
-    minute.value = minutes;
-	second.value = seconds;
+    outputM.value = minutes;
+	outputS.value = seconds;
 	
-	test();
+	if (progress != 0) {
+		if (phaseState == "work") {wProgress = progress}
+		else {bProgress = progress}
+	}
+	
+	//test();
 }
 //
+function calculateMinute(input){
+	var minutes = parseInt(input / 60, 10);
+	return minutes = minutes < 10 ? "0" + minutes : minutes
+}
+function calculateSecond(input){
+	var seconds = parseInt(input % 60, 10);
+	return seconds = seconds < 10 ? "0" + seconds : seconds
+}
+
 function clockControl() {
-	total = Number(minute.value) * 60 + Number(second.value);
-	progress = total;
+	wTotal = Number(minute.value) * 60 + Number(second.value);
+	wProgress = wTotal;
+	bTotal =  Number(breakminute.value * 60) + Number(breaksecond.value);
+	bProgress = bTotal;
 	
-	if (clockstatus == 0){
-		clockstatus = 1;
+	if (clockState == 0){
+		clockState = 1;
 		theButton.style.backgroundImage = "url('https://cdn.icon-icons.com/icons2/1132/PNG/512/1486348534-music-pause-stop-control-play_80459.png')";
-		clock = setInterval(countdown, 1000);
 		resetButtonVisibilty();
+		clock = setInterval(countdown, 1000);
 		inputs.forEach((e)=>{e.readOnly = "true"});
 	}
 	else {
-		clockstatus = 0;
+		clockState = 0;
 		theButton.style.backgroundImage = "url('https://cdn.icon-icons.com/icons2/1132/PNG/512/1486348532-music-play-pause-control-go-arrow_80458.png')";
-		clearInterval(clock);
 		resetButtonVisibilty();
-		inputs.forEach((e)=>{e.readOnly = ""})
+		clearInterval(clock);
 	}
 }
 
+function changePhase() {
+	if (phase.innerHTML == "") {phase.innerHTML = "Break Time!"}
+	else phase.innerHTML = "";
+}
+
 function resetButtonVisibilty() {
-	if (clockstatus == 0 ){resetButton.style.visibility = "visible"}
+	if (clockState == 0 ){resetButton.style.visibility = "visible"}
 	else {resetButton.style.visibility = "hidden"}
 }
 
 function reset() {
 	clearInterval(clock);
-	clockstatus = 0;
-	minute.value = "25";
-	second.value = "00";
-	loop.value = "4";
+	clockState = 0;
+	phaseState = "work";
+	minute.value = "00", second.value = "05";
+	breakminute.value = "00", breaksecond.value = "05";
+	loop.value = "2";
 	theButton.style.backgroundImage = "url('https://cdn.icon-icons.com/icons2/1132/PNG/512/1486348532-music-play-pause-control-go-arrow_80458.png')";
 	resetButton.style.visibility = "hidden";
+	inputs.forEach((e)=>{e.readOnly = ""})
 }
 
-function checkinput(e) {
+function checkInput(e) {
 	var value = e.target.value;
 	e.target.value = value.replace(/\D/g,"");
 }
@@ -86,16 +135,16 @@ function checkinput(e) {
 theButton.addEventListener("click", clockControl);
 resetButton.addEventListener("click", reset);
 inputs.forEach((e)=>{
-	e.addEventListener("input", checkinput);
+	e.addEventListener("input", checkInput);
 });
 
 //actions
 resetButton.style.visibility = "hidden";
 
 //testing zone
-function test() {
-	console.log("clock:",minute.value+":"+second.value,loop.value);
-	console.log("total:", total);
-	console.log("progress:", progress);
-	console.log("clockstatus:",clockstatus);
+function test(input) {
+	console.log("work:", wTotal, wProgress);
+	console.log("break:", bTotal, bProgress);
+	console.log("loop:", loop.value);
+	console.log("clockState:",clockState);
 }

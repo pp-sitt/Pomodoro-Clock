@@ -3,27 +3,36 @@
 <head>
     <meta charset="utf-8">
     <title>Pomodoro Clock</title>
+	<link rel="icon" type="image/png" href="favicomatic/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-    <h1 id="title">Pomodoro Clock</h1>
+    <h1 id="title"></h1>
     <div id="clock">
-		<h1 id="phase"></h1>
-		<div id="digitsbox">
-			<input id="minute" class="digits" value="00" maxlength="2"></input>
-			<span id="twodots" class="digits">:</span>
-			<input id="second" class="digits" value="05" maxlength="2"></input>
-			<input id="breakminute" class="breakdigits digits" value="00" maxlength="2"></input>
-			<span class="breakdigits">:</span>
-			<input id="breaksecond" class="breakdigits digits" value="05" maxlength="2"></input>
-			<input id="loop" class="digits" value="2" maxlength="1"></input>
-			<h1>click on the number to edit</h1>
-		</div>
+
+			<div id="left-side-digit-box">
+				<span id="phase" class="digits">Break</span>
+				<input id="minute" class="digits" value="00" maxlength="2"></input>
+				<span id="dot" class="digits dots">:</span>
+				<input id="second" class="digits" value="05" maxlength="2"></input>
+			</div>
+			<div id="right-side-digit-box">
+				<div id="break-box">
+					<input id="breakminute" class="breakdigits digits" value="00" maxlength="2"></input>
+					<span class="breakdigits dots digits">:</span>
+					<input id="breaksecond" class="breakdigits digits" value="05" maxlength="2"></input>
+				</div>
+				<input id="loop" class="digits" value="2" maxlength="1"></input>
+			</div>
+
     </div>
+		<p id="hint">click on the number to set timer</p>
 	<div id="controller">
-		<button id="thebutton"></button>
-		<button id="reset"></button>
+		<button id="thebutton" class="material-icons">play_arrow</button>
+		<button id="reset" class="material-icons">loop</button>
 	</div>
+	<footer>footer</footer>
     <script src="js/script.js"></script>
 </body>
 </html>

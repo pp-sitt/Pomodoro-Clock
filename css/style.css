@@ -1,79 +1,66 @@
 * {
     box-sizing: border-box;
+	margin: 0;
+	font-family: fantasy;
 }
-
-#title {
-    color: black;
-	font-size: 5vw;
-	font-family: monospace;
-	text-align: center;
-}
-
-#clock {
-    border: solid 1px blue;
-	text-align:	center;
-	height: 50vh;
+body {
+	height: 100vh;
+	background-color: black;
 	display: flex;
-  	justify-content: center;
-  	align-items: center;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;	
 }
-#digitsbox {
-	border: solid 1px red;
+#clock {
+	display: flex;
+	justify-content: center;
+}
+#left-side-digit-box > * {
+	color: white;
 }
 .digits {
 	border: none;
-	font-size: 20vh;
-	width: 23vh;
+	font-size: 15vw;
+	width: 17vw;
+	color: red;
+	background: black;
 }
-.digits:focus, .breakdigits {
+.digits:focus, .breakdigits:focus {
 	outline: none;
 }
-#twodots{
+.dots{
 	position: relative;
-	top: -25px;
+	top: -0.1em;
 }
-#loop {
-	font-size: 5vh;
-	width: 7vh;
+#right-side-digit-box{
+	display: flex;
+	flex-direction: column-reverse;
 }
 .breakdigits {
 	border: none;
-	font-size: 10vh;
-	width: 12vh;
+	font-size: 7vw;
+	width: 8vw;
 }
-#breakminute {
-	width: 12vh;
+#loop {
+	font-size: 4vw;
+	width: 3vw;
+	color: #9d333d;
 }
-
+#hint{
+	display: inline;
+	color: white;
+	font-family: cursive;
+}
 #controller {
-	position: relative;
-	text-align: center;
-	border: solid 1px green;
+	display: flex;
+	justify-content: center;
 }
-#controller button {
+#controller > * {
 	border: none;
-	/*background: white;*/
+	font-size: 10vh;
+	background: black;
+	color: #67020b;
 }
-#thebutton {
-	position: relative;
-	left: 20px;
-	background: no-repeat center;
-	background-image: url("https://cdn.icon-icons.com/icons2/1132/PNG/512/1486348532-music-play-pause-control-go-arrow_80458.png");
-	background-size: 130px;
-	height: 80px;
-	width: 80px;
-}
-#thebutton:active {
-	font-size: 4.5em;
-}
-#reset {
-	position: relative;
-	background: no-repeat center;
-	background-image: url("https://cdn2.iconfinder.com/data/icons/game-center-mixed-icons/512/arrow2.png");
-	background-size: 30px;
-	height: 30px;
-	width: 30px;
-}
-#restart:active {
-	font-size: 1.5em;
+#controller > *:focus {
+	outline: none;
 }

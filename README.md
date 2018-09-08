@@ -9,12 +9,18 @@ this is part of the Odin Project
 - reset button when paused **DONE**
 - be able to set the timer **DONE**
 - break and work phase **DONE**
-- when it's break time the big digits change to text "BREAK TIME!" and the small digit start counting down with added ":00" behide
-- long break after 4 loops
+- digits change to text when pause or break **DONE**
+- show only reset button when finished
+- have a tooltip that show how to use the clock at the start
 
 **Extra**
-- red tomato theme
+- fix the pause sysyem 
+  - by useing {if(state=0){return}} instead of {clearInterval(clock);}
+- hint appear in the same space as the clock
+- click to start a break
 - notification
-- be able to set how many time the clock loops
+- sound
+- be able to set how many time the clock loops **DONE**
+- long break after 4 loops
 - visual indication of divied slice of time and progress
   - etc. (O) (O) () ()

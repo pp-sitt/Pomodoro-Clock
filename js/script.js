@@ -2,31 +2,37 @@
 var document, setInterval, clearInterval, window;
 
 //global variables
-var minute, second;
+var minute, dot, second, workDigits;
 minute = document.querySelector("#minute");
+dot = document.querySelector("#dot");
 second = document.querySelector("#second");
+workDigits = [minute, dot, second];
 
-var breakminute, breaksecond;
+var breakminute, breakdot, breaksecond, breakDigits;
 breakminute = document.querySelector("#breakminute");
+breakdot = document.querySelector("#breakdot");
 breaksecond = document.querySelector("#breaksecond");
+breakDigits = [breakminute, breakdot, breaksecond];
 
 var loop, phase;
 loop = document.querySelector("#loop");
 phase = document.querySelector("#phase");
 
-var theButton, resetButton, inputs;
+var theButton, resetButton, settingsButton;
 theButton = document.querySelector("#thebutton");
 resetButton = document.querySelector("#reset");
-inputs = document.querySelectorAll(".digits");
+settingsButton = document.querySelector("#settings");
 
 var clock, clockState = 0;
 var wTotal, wProgress;
 var bTotal, bProgress;
-var loops = Number(loop.value);
 var phaseState = "work";
 
-var hint
+var hint, phaseImage, inputs, tooltips;
 hint = document.querySelector("#hint");
+phaseImage = document.querySelector("#phase-image");
+inputs = document.querySelectorAll(".digits");
+tooltip = document.querySelectorAll(".tooltip");
 
 //functions
 // stolen from stackoverflow
@@ -50,7 +56,8 @@ function countdown() {
 			phaseControl("break");
 		}
 		else if (phaseState == "break"){
-			phaseControl("hide");
+			phaseState == "work";
+			phaseControl("work");
 			if (--loop.value == 0) {
 				clearInterval(clock);
 			}
@@ -78,85 +85,88 @@ function countdown() {
 	}
 }
 //
-function calculateMinute(input){
+function calculateMinute(input) {
 	var minutes = parseInt(input / 60, 10);
 	return minutes = minutes < 10 ? "0" + minutes : minutes
 }
-function calculateSecond(input){
+function calculateSecond(input) {
 	var seconds = parseInt(input % 60, 10);
 	return seconds = seconds < 10 ? "0" + seconds : seconds
 }
 
-function clockControl() {
+function calculateTotal() {
 	wTotal = Number(minute.value) * 60 + Number(second.value);
 	wProgress = wTotal;
 	bTotal =  Number(breakminute.value * 60) + Number(breaksecond.value);
 	bProgress = bTotal;
-	
+}
+
+function clockControl() {
 	if (clockState == 0){
 		clockState = 1;
 		theButton.innerHTML = "pause";
-		resetButtonVisibilty();
 		clock = setInterval(countdown, 1000);
 		inputs.forEach((e)=>{e.readOnly = "true"});
-		phaseControl("hide");
+		if(phaseState == "work") {phaseControl("work")}
+		else {phaseControl("break")}
+		hideTooltip("hide");
 	}
 	else {
 		clockState = 0;
 		theButton.innerHTML = "play_arrow";
-		resetButtonVisibilty();
 		clearInterval(clock);
 		phaseControl("pause");
 	}
 }
 
 function phaseControl(input) {
-	
 	switch (input){
-		case "hide":
-			minute.style.display = "inline";
-			document.querySelector("#dot").style.display = "inline";
-			second.style.display = "inline";
+		case "work":
+			workDigits.forEach((e)=>{e.style.display = "inline"});
+			breakDigits.forEach((e)=>{e.style.display = "inline"});
+			loop.style.display = "inline";
 			phase.style.display = "none";
+			phaseImage.src = "image/clock.png";
 			break;
 			
 		case "break":
-			minute.style.display = "none";
-			document.querySelector("#dot").style.display = "none";
-			second.style.display = "none";
+			workDigits.forEach((e)=>{e.style.display = "none"});
+			breakDigits.forEach((e)=>{e.style.display = "inline"});
+			loop.style.display = "inline";
 			phase.style.display = "inline";
-			phase.innerHTML = "Break";
+			phase.innerHTML = "BREAK";
+			phase.style.color = "white";
+			phaseImage.src = "image/break.png"
 			break;
 		
 		case "pause":
-			minute.style.display = "none";
-			document.querySelector("#dot").style.display = "none";
-			second.style.display = "none";
+			workDigits.forEach((e)=>{e.style.display = "none"});
+			breakDigits.forEach((e)=>{e.style.display = "none"});
+			loop.style.display = "none";
 			phase.style.display = "inline";
-			phase.innerHTML = "Paused";
+			phase.innerHTML = "PAUSED";
+			if (phaseState == "work") {
+				phase.style.color = "white";
+				phaseImage.src = "image/clock.png";
+			}
+			else {
+				phase.style.color = "red";
+				phaseImage.src = "image/break-red.png";
+			}
 			break;
-			
 	}
-}
-
-function resetButtonVisibilty() {
-	if (clockState == 0 ){resetButton.style.visibility = "visible"}
-	else {resetButton.style.visibility = "hidden"}
 }
 
 function reset() {
 	clearInterval(clock);
-	clockState = 0;
-	phaseState = "work";
-	minute.value = "00", second.value = "05";
-	breakminute.value = "00", breaksecond.value = "05";
-	loop.value = "2";
+	minute.value = "25", second.value = "00";
+	breakminute.value = "05", breaksecond.value = "00";
+	clockState = 0,	loop.value = "4", phaseState = "work";
 	theButton.innerHTML = "play_arrow";
-	resetButton.style.visibility = "hidden";
 	inputs.forEach((e)=>{e.readOnly = ""})
-	hint.style.visibility = "";
-	hint.innerHTML = "click on the number to set the timer";
-	phaseControl("hide");
+	calculateTotal();
+	phaseControl("work");
+	hideTooltip();
 }
 
 function checkInput(e) {
@@ -164,28 +174,29 @@ function checkInput(e) {
 	e.target.value = value.replace(/\D/g,"");
 }
 
-function hideHint(e) {
-	hint.style.visibility = "hidden";
-	if (e.target.readOnly == true){
-		hint.style.visibility = "";
-		hint.innerHTML = "restart to set the timer";
-		setTimeout(()=>{
-			hint.style.visibility = "hidden";
-		}, 1000);
-	}
+function setTheClock() {
+	reset();
+	minute.value = "00", second.value = "00";
+	breakminute.value = "00", breaksecond.value = "00";
+	loop.value = "1";
+	calculateTotal();
 }
-
+function hideTooltip(input) {
+	if (input == "hide") {tooltip.forEach((e)=>{e.style.display = "none"})}
+	else tooltip.forEach((e)=>{e.style.display = ""})
+}
 //event listeners
 theButton.addEventListener("click", clockControl);
 resetButton.addEventListener("click", reset);
 inputs.forEach((e)=>{
 	e.addEventListener("input", checkInput);
-	e.addEventListener("focus", hideHint);
+	e.addEventListener("focusout", calculateTotal);
 });
+settingsButton.addEventListener("click", setTheClock);
 
 //actions
-resetButton.style.visibility = "hidden";
 phase.style.display = "none";
+calculateTotal();
 
 //testing zone
 var testing;

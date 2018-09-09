@@ -8,31 +8,40 @@
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
-    <h1 id="title"></h1>
+	<header>
+    	<h1 id="title"></h1>
+	</header>
     <div id="clock">
-
-			<div id="left-side-digit-box">
-				<span id="phase" class="digits">Break</span>
-				<input id="minute" class="digits" value="00" maxlength="2"></input>
-				<span id="dot" class="digits dots">:</span>
-				<input id="second" class="digits" value="05" maxlength="2"></input>
-			</div>
-			<div id="right-side-digit-box">
-				<div id="break-box">
-					<input id="breakminute" class="breakdigits digits" value="00" maxlength="2"></input>
-					<span class="breakdigits dots digits">:</span>
-					<input id="breaksecond" class="breakdigits digits" value="05" maxlength="2"></input>
+		<img id="phase-image" src="image/clock.png">
+			<div id="left-side-clock">
+				<span id="phase" class="digits"></span>
+				<div id="work-box">
+					<input id="minute" class="digits" value="25" maxlength="2"></input>
+					<span id="dot" class="digits dots">:</span>
+					<input id="second" class="digits" value="00" maxlength="2"></input>
+					<span class="tooltip">Set Working Time</span>
 				</div>
-				<input id="loop" class="digits" value="2" maxlength="1"></input>
 			</div>
-
+			<div id="right-side-clock">
+				<div id="break-box">
+					<input id="breakminute" class="digits" value="05" maxlength="2"></input>
+					<span id="breakdot" class="dots digits">:</span>
+					<input id="breaksecond" class="digits" value="00" maxlength="2"></input>
+					<span class="tooltip">Set Break Time</span>
+				</div>
+				<input id="loop" class="digits" value="4" maxlength="1"></input>
+				<span class="tooltip">Set Loop</span>
+			</div>
     </div>
-		<p id="hint">click on the number to set timer</p>
+		<p id="hint"></p>
 	<div id="controller">
+		<button id="settings" class="material-icons">settings</button>
 		<button id="thebutton" class="material-icons">play_arrow</button>
 		<button id="reset" class="material-icons">loop</button>
 	</div>
-	<footer>footer</footer>
+	<footer>
+		<a href="https://github.com/punpun074/Pomodoro-Clock" target="_blank"><img id="github-icon" src="image/github.png"></a>
+	</footer>
     <script src="js/script.js"></script>
 </body>
 </html>

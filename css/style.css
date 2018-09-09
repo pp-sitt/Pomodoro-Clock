@@ -11,18 +11,16 @@ body {
 	align-items: center;
 	justify-content: center;	
 }
+
 #clock {
 	display: flex;
 	justify-content: center;
 }
-#left-side-digit-box > * {
-	color: white;
-}
 .digits {
 	border: none;
 	font-size: 15vw;
-	width: 17vw;
-	color: red;
+	width: 16.5vw;
+
 	background: black;
 }
 .digits:focus, .breakdigits:focus {
@@ -32,25 +30,86 @@ body {
 	position: relative;
 	top: -0.1em;
 }
-#right-side-digit-box{
+#left-side-clock {
+	
+}
+/* Work Digits */
+#work-box > * {
+	color: white;
+}
+#work-box {
+	position: relative;
+}
+#work-box .tooltip {
+	top: -20%;
+	left: 10%;
+	color: white;
+	font-size: 200%;
+}
+#work-box .tooltip::after {
+	top: 105%;
+	left: 50%;
+	border: solid 1vw;
+	border-color: white transparent transparent transparent;
+}
+#work-box:hover .tooltip {
+	visibility: visible;
+}
+#right-side-clock{
 	display: flex;
 	flex-direction: column-reverse;
 }
-.breakdigits {
+/* Break Digits */
+#break-box > * {
+	color: red;
 	border: none;
 	font-size: 7vw;
-	width: 8vw;
+	width: 7.8vw;
 }
+#break-box {
+	position: relative;
+}
+#break-box .tooltip {
+	margin-top: 5%;
+	color: red;
+	font-size: 150%;
+	width: 100%;
+	text-align: right
+}
+#break-box .tooltip::after {
+	bottom: 100%;
+	right: 10%;
+	border: solid 1vw;
+	border-color: transparent transparent red transparent;
+}
+#break-box:hover .tooltip {
+	visibility: visible;
+}
+/* Loop */
 #loop {
 	font-size: 4vw;
 	width: 3vw;
 	color: #9d333d;
 }
+#loop + .tooltip {
+	position: relative;
+	top: 0;
+	color: #9d333d;
+}
+#loop + .tooltip::after {
+	border: solid 1vw;
+	border-color: transparent #9d333d transparent transparent;
+}
+#loop:hover + .tooltip{
+	visibility: visible;
+}
+/* Hint */
 #hint{
 	display: inline;
 	color: white;
 	font-family: cursive;
 }
+/* Controller */
 #controller {
 	display: flex;
 	justify-content: center;
@@ -60,7 +119,42 @@ body {
 	font-size: 10vh;
 	background: black;
 	color: #67020b;
+	cursor: pointer;
 }
 #controller > *:focus {
 	outline: none;
+}
+#controller > *:active {
+	font-size: 8vh;
+}
+#controller > *:hover {
+	color: #89000c;
+}
+/* Github icon */
+#github-icon {
+	height: 80px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+#github-icon:active {
+	height: 75px;
+}
+#github-icon:hover {
+	filter: saturate(130%);
+}
+/* NEW */
+#phase-image {
+	height: 15vw;
+}
+#phase {
+	color: white;
+}
+.tooltip {
+	visibility: hidden;
+	position: absolute;
+}
+.tooltip::after {
+	content: "";
+	position: absolute;
 }

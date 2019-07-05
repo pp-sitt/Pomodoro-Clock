@@ -3,15 +3,15 @@
 this is part of the Odin Project
 
 **ToDoList**
-- working clock **DONE**
-- loops **DONE**
-- start/pause toggle button **DONE**
-- reset button **DONE**
-- be able to set the timer **DONE**
-- break and work phase **DONE**
-- digits change to text when pause or break **DONE**
+- ~~working clock~~ **DONE**
+- ~~loops~~ **DONE**
+- ~~start/pause toggle button~~ **DONE**
+- ~~reset button~~ **DONE**
+- ~~be able to set the timer~~ **DONE**
+- ~~break and work phase~~ **DONE**
+- ~~digits change to text when pause or break~~ **DONE**
 - enphasize reset button when the finished counting down
-- tooltip **DONE**
+- ~~tooltip~~ **DONE**
 - have a tooltip that show how to use the clock at the start
 
 **Extra**
